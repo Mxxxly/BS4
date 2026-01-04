@@ -3,17 +3,46 @@ from bs4 import BeautifulSoup
 
 
 # this is to find the length of a div or tag
-url = "https://books.toscrape.com/"
-response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
+# url = "https://books.toscrape.com/"
+# response = requests.get(url)
+# soup = BeautifulSoup(response.text, "html.parser")
 
-books = soup.find_all("article", class_="product_pod")
-print(len(books))
+# # To count the amount of the tags
+
+# books = soup.find_all("article", class_="product_pod")
+# # print(len(books))
 
 # for book in books:
 #     title = book.find("a")["title"]
 #     price = book.find("p", class_="price_color").text
 #     print(title, "-", price)
+
+
+# url = "https://books.toscrape.com/"
+# response = requests.get(url)
+# soup = BeautifulSoup(response.text, "html.parser")
+
+# books = soup.find_all("article", class_="product_pod")
+
+# for book in books:
+#     title = book.find("a").get("title")
+#     price = book.find("p", class_="price_color").text
+#     print(title, "-", price)
+
+# correct way to scrape the book titles and prices
+
+url = "https://books.toscrape.com/"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
+
+books = soup.find_all("article", class_="product_pod")
+
+for book in books:
+    title = book.find("h3").find("a").get("title")
+    price = book.find("p", class_="price_color").text
+    print(title, "-", price)
+
+
 
 
 # Instead of just printing, let’s store.
